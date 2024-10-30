@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vietnam Tourism</title>
+    <title>Hotel Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -13,40 +13,76 @@
       body {
         font-family: "Poppins", sans-serif;
       }
+
+      .active {
+        background-color: #2563eb; /* Màu xanh cho button active */
+        color: white;
+      }
+
+      .filter-button {
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .filter-button:hover {
+        background-color: #93c5fd; /* Màu khi hover */
+        color: black;
+      }
     </style>
   </head>
   <body class="flex flex-col min-h-screen bg-gray-100">
-    <header class="bg-blue-600 text-white shadow-lg">
-      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <img src="logo.png" alt="Logo" class="w-10 h-10 rounded-full" />
-          <h1 class="text-2xl font-bold">Vietnam Tourism</h1>
-        </div>
-        <nav class="space-x-4">
-          <a href="/" class="hover:text-blue-200 transition duration-300">Home</a>
-          <a href="/admin.html" class="hover:text-blue-200 transition duration-300">Admin</a>
-        </nav>
+    <div
+      id="loading-spinner"
+      class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
+    >
+      <div
+        class="loader border-8 border-t-8 border-gray-200 border-t-blue-600 rounded-full w-16 h-16 animate-spin"
+      ></div>
+    </div>
+    <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="./logo.png" alt="Logo" class="h-10 mr-2" />
+        <h1 class="text-xl font-bold">Hotel Management</h1>
       </div>
+      <input
+        id="search-bar"
+        type="text"
+        placeholder="Search rooms..."
+        class="px-4 py-2 rounded-lg text-gray-700"
+        oninput="searchRooms()"
+      />
     </header>
-    <main class="container mx-auto mt-8 px-4 flex-grow">
-      <div id="destinations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+    <main class="p-4">
+      <div class="flex space-x-4 mb-4" id="filter-buttons">
+        <button class="filter-button px-4 py-2 rounded-lg active" onclick="filterRooms('all')">All Rooms</button>
+        <button class="filter-button px-4 py-2 rounded-lg" onclick="filterRooms('Standard')">Standard Room</button>
+        <button class="filter-button px-4 py-2 rounded-lg" onclick="filterRooms('Deluxe')">Deluxe Room</button>
+        <button class="filter-button px-4 py-2 rounded-lg" onclick="filterRooms('Suite')">Suite Room</button>
+      </div>
+
+      <h2 class="text-2xl font-semibold mb-4">Available Rooms</h2>
+      <div id="room-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </main>
+
     <footer class="bg-gray-800 text-white mt-12">
       <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 class="text-lg font-semibold mb-4">About Us</h3>
-            <p class="text-gray-400">
-              Vietnam Tourism is dedicated to showcasing the beauty and culture of Vietnam to travelers from around the
-              world.
-            </p>
+            <p class="text-gray-400">Our hotel is dedicated to providing the best experience for our guests.</p>
           </div>
           <div>
             <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white">Destinations</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">Travel Tips</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Rooms</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Booking</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
+              </li>
             </ul>
           </div>
           <div>
@@ -59,10 +95,10 @@
           </div>
         </div>
         <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>&copy; 2024 Vietnam Tourism. All rights reserved.</p>
+          <p>&copy; 2024 Hotel Management. All rights reserved.</p>
         </div>
       </div>
     </footer>
-    <script src="/js/main.js"></script>
+    <script src="/scripts/main.js"></script>
   </body>
 </html>
