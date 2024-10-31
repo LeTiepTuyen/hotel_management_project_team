@@ -3,8 +3,9 @@ const apiUrl = "/api/room"; // Đồng bộ với server.js
 async function fetchRooms() {
   try {
     document.getElementById("loading-spinner").classList.remove("hidden"); // Show spinner
-    const response = await fetch(apiUrl);
-    return await response.json();
+    const response = await fetch(apiUrl); // apiUrl = "/api/room"
+    const rooms = await response.json(); // Example rooms: [{ "roomId": "1", "roomType": "Deluxe", "description": "A deluxe room", "price": 100, "image": "deluxe.jpg" }]
+    return rooms;
   } catch (error) {
     console.error("Error fetching rooms:", error);
     return [];
@@ -43,20 +44,16 @@ async function filterRooms(type) {
   const selectedButton = [...buttons].find((button) => button.textContent.includes(type) || type === "all");
   if (selectedButton) selectedButton.classList.add("active");
 
-  document.getElementById("loading-spinner").classList.remove("hidden"); // Show spinner
   const rooms = await fetchRooms();
   const filteredRooms = type === "all" ? rooms : rooms.filter((room) => room.roomType.includes(type));
   displayRooms(filteredRooms);
-  document.getElementById("loading-spinner").classList.add("hidden"); // Hide spinner
 }
 
 async function searchRooms() {
   const query = document.getElementById("search-bar").value.toLowerCase();
-  document.getElementById("loading-spinner").classList.remove("hidden"); // Show spinner
   const rooms = await fetchRooms();
   const filteredRooms = rooms.filter((room) => room.roomType.toLowerCase().includes(query));
   displayRooms(filteredRooms);
-  document.getElementById("loading-spinner").classList.add("hidden"); // Hide spinner
 }
 
 function viewDetail(roomId) {
