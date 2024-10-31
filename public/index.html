@@ -45,12 +45,20 @@
         <img src="./assets/icons/logo.png" alt="Logo" class="h-10 mr-2" />
         <h1 class="text-xl font-bold">Hotel Management</h1>
       </div>
+      <nav class="space-x-4">
+        <a href="index.html" class="text-white hover:text-blue-300 hover:underline cursor-pointer">Home</a>
+        <a href="#room-list" class="text-white hover:text-blue-300 hover:underline cursor-pointer">Rooms</a>
+        <a class="text-white hover:text-blue-300 hover:underline cursor-pointer">About Us</a>
+        <a class="text-white hover:text-blue-300 hover:underline cursor-pointer">Contact</a>
+        <a class="text-white hover:text-blue-300 hover:underline cursor-pointer">Blog</a>
+      </nav>
       <input
         id="search-bar"
         type="text"
         placeholder="Search rooms..."
         class="px-4 py-2 rounded-lg text-gray-700"
         oninput="searchRooms()"
+        style="flex-grow: 1; max-width: 300px; margin-left: 16px"
       />
     </header>
 
